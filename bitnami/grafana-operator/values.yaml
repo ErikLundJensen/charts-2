@@ -305,7 +305,6 @@ grafana:
     enabled: true
     runAsUser: 1001
     runAsGroup: 1001
-    fsGroup: 1001
     allowPrivilegeEscalation: false
   ## Grafana containers' resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
@@ -480,7 +479,6 @@ grafana:
       reporting_enabled: false
       check_for_updates: false
     security:
-      disable_initial_admin_creation: false
       disable_gravatar: false
       # ## Grafana Admin credentials, if omitted they will be admin:<random_pass>
       # admin_user:

@@ -85,22 +85,6 @@ spec:
       podAntiAffinity: {{- include "common.affinities.pods" (dict "type" .Values.grafana.podAntiAffinityPreset "component" "grafana" "context" $) | nindent 8 }}
       nodeAffinity: {{- include "common.affinities.nodes" (dict "type" .Values.grafana.nodeAffinityPreset.type "key" .Values.grafana.nodeAffinityPreset.key "values" .Values.grafana.nodeAffinityPreset.values) | nindent 8 }}
     {{- end }}
-    {{- if .Values.grafana.livenessProbe.enabled }}
-    livenessProbeSpec:
-      initialDelaySeconds: {{ .Values.grafana.livenessProbe.initialDelaySeconds }}
-      periodSeconds: {{ .Values.grafana.livenessProbe.periodSeconds }}
-      timeoutSeconds: {{ .Values.grafana.livenessProbe.timeoutSeconds }}
-      successThreshold: {{ .Values.grafana.livenessProbe.successThreshold }}
-      failureThreshold: {{ .Values.grafana.livenessProbe.failureThreshold }}
-    {{- end }}
-    {{- if .Values.grafana.readinessProbe.enabled }}
-    readinessProbeSpec:
-      initialDelaySeconds: {{ .Values.grafana.readinessProbe.initialDelaySeconds }}
-      periodSeconds: {{ .Values.grafana.readinessProbe.periodSeconds }}
-      timeoutSeconds: {{ .Values.grafana.readinessProbe.timeoutSeconds }}
-      successThreshold: {{ .Values.grafana.readinessProbe.successThreshold }}
-      failureThreshold: {{ .Values.grafana.readinessProbe.failureThreshold }}
-    {{- end }}
     {{- if .Values.grafana.updateStrategy }}
     strategy: {{ toYaml .Values.grafana.updateStrategy | nindent 6 }}
     {{- end }}
@@ -114,6 +98,22 @@ spec:
     {{- end }}
   {{- if .Values.grafana.resources }}
   resources: {{- toYaml .Values.grafana.resources | nindent 4 }}
+  {{- end }}
+  {{- if .Values.grafana.livenessProbe.enabled }}
+  livenessProbeSpec:
+    initialDelaySeconds: {{ .Values.grafana.livenessProbe.initialDelaySeconds }}
+    periodSeconds: {{ .Values.grafana.livenessProbe.periodSeconds }}
+    timeoutSeconds: {{ .Values.grafana.livenessProbe.timeoutSeconds }}
+    successThreshold: {{ .Values.grafana.livenessProbe.successThreshold }}
+    failureThreshold: {{ .Values.grafana.livenessProbe.failureThreshold }}
+  {{- end }}
+  {{- if .Values.grafana.readinessProbe.enabled }}
+  readinessProbeSpec:
+    initialDelaySeconds: {{ .Values.grafana.readinessProbe.initialDelaySeconds }}
+    periodSeconds: {{ .Values.grafana.readinessProbe.periodSeconds }}
+    timeoutSeconds: {{ .Values.grafana.readinessProbe.timeoutSeconds }}
+    successThreshold: {{ .Values.grafana.readinessProbe.successThreshold }}
+    failureThreshold: {{ .Values.grafana.readinessProbe.failureThreshold }}
   {{- end }}
   ingress:
     enabled: {{ .Values.grafana.ingress.enabled }}
