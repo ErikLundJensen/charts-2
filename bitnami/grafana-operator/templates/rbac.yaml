@@ -225,6 +225,19 @@ rules:
       - delete
       - deletecollection
       - watch
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+        - ingresses
+    verbs:
+       - get
+       - list
+       - create
+       - update
+       - delete
+       - deletecollection
+       - watch
+       - create
 ---
 apiVersion: {{ include "common.capabilities.rbac.apiVersion" . }}
 kind: ClusterRoleBinding
